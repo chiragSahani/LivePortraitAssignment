@@ -27,54 +27,65 @@ python app.py --source source.jpg --driving driving.mp4
 ```
 
 
-## 🏗️ Optimized System Architecture Diagram
 
-Replace your current Mermaid code with the following for a clearer, more visually structured graph:
+## 🏗️  System Architecture Diagram
 
 ```mermaid
+
 flowchart TD
     %% Inputs
-    A1([📥 User Input<br/>(Image/Video)]) --> B1[🔍 Preprocessing<br/>(Resizing, Alignment, etc.)]
+    A1(["User Input (Image/Video)"]) --> B1["Preprocessing (Resizing, Alignment, etc.)"]
+    
     %% Mode Selection
-    B1 --> C1{⚙️ Mode Selector<br/>Fast / Quality}
+    B1 --> C1{"Mode Selector<br/>Fast / Quality"}
+    
     %% Fast Path
-    C1 -- Fast --> D1[🚀 Optimized Model<br/>torch.compile + FP16]
+    C1 -- Fast --> D1["Optimized Model<br/>torch.compile + FP16"]
+    
     %% Quality Path
-    C1 -- Quality --> D2[🧠 Original Model<br/>FP32 Precision]
+    C1 -- Quality --> D2["Original Model<br/>FP32 Precision"]
+    
     %% Animation Core
-    D1 --> E1[🛠️ Animation Engine<br/>Frame Generation]
+    D1 --> E1["Animation Engine<br/>Frame Generation"]
     D2 --> E1
+    
     %% Post-Processing
-    E1 --> F1[🔁 Parallel Post-Processing<br/>(Smoothing, Rendering)]
+    E1 --> F1["Parallel Post-Processing<br/>(Smoothing, Rendering)"]
+    
     %% Output
-    F1 --> G1([📤 Final Output<br/>(Animated Image/Video)])
+    F1 --> G1(["Final Output (Animated Image/Video)"])
 
     %% Grouping
-    subgraph Input Layer
+    subgraph "Input Layer"
         A1
     end
-    subgraph Preprocessing Layer
+
+    subgraph "Preprocessing Layer"
         B1
     end
-    subgraph Mode Selector
+
+    subgraph "Mode Selection"
         C1
     end
-    subgraph Model Layer
+
+    subgraph "Model Layer"
         D1
         D2
     end
-    subgraph Animation Engine
+
+    subgraph "Animation Core"
         E1
     end
-    subgraph Post-Processing Layer
+
+    subgraph "Post-Processing Layer"
         F1
     end
-    subgraph Output Layer
+
+    subgraph "Output Layer"
         G1
     end
+
 ```
-
-
 
 ## ✨ Features at a Glance
 

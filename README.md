@@ -26,47 +26,54 @@ python app.py                   # Launch Gradio Web UI
 python app.py --source source.jpg --driving driving.mp4
 ```
 
----
 
-## 🏗️ System Architecture
+## 🏗️ Optimized System Architecture Diagram
 
+Replace your current Mermaid code with the following for a clearer, more visually structured graph:
+
+```mermaid
 flowchart TD
-    subgraph INPUT [🎯 Input Layer]
-        A[📥 User Input<br/>(Image / Video)]
-    end
+    %% Inputs
+    A1([📥 User Input<br/>(Image/Video)]) --> B1[🔍 Preprocessing<br/>(Resizing, Alignment, etc.)]
+    %% Mode Selection
+    B1 --> C1{⚙️ Mode Selector<br/>Fast / Quality}
+    %% Fast Path
+    C1 -- Fast --> D1[🚀 Optimized Model<br/>torch.compile + FP16]
+    %% Quality Path
+    C1 -- Quality --> D2[🧠 Original Model<br/>FP32 Precision]
+    %% Animation Core
+    D1 --> E1[🛠️ Animation Engine<br/>Frame Generation]
+    D2 --> E1
+    %% Post-Processing
+    E1 --> F1[🔁 Parallel Post-Processing<br/>(Smoothing, Rendering)]
+    %% Output
+    F1 --> G1([📤 Final Output<br/>(Animated Image/Video)])
 
-    subgraph PRE [🔍 Preprocessing Layer]
-        B[Preprocessing<br/>(Resizing, Alignment, etc.)]
+    %% Grouping
+    subgraph Input Layer
+        A1
     end
-
-    subgraph MODE [⚙️ Mode Selector]
-        C{Mode<br/>Fast / Quality}
+    subgraph Preprocessing Layer
+        B1
     end
-
-    subgraph MODEL_FAST [🚀 Fast Path]
-        D1[Optimized Model<br/>torch.compile + FP16]
+    subgraph Mode Selector
+        C1
     end
-
-    subgraph MODEL_QUALITY [🧠 Quality Path]
-        D2[Original Model<br/>FP32 Precision]
+    subgraph Model Layer
+        D1
+        D2
     end
-
-    subgraph CORE [🛠️ Animation Engine]
-        E[Core Animation<br/>Frame Generation]
+    subgraph Animation Engine
+        E1
     end
-
-    subgraph POST [🔁 Post-Processing Layer]
-        F[Parallel Post-Processing<br/>(Smoothing, Rendering)]
+    subgraph Post-Processing Layer
+        F1
     end
-
-    subgraph OUTPUT [📤 Output Layer]
-        G[Final Output<br/>(Animated Image / Video)]
+    subgraph Output Layer
+        G1
     end
+```
 
-    A --> B --> C
-    C -->|Fast| D1 --> E
-    C -->|Quality| D2 --> E
-    E --> F --> G
 
 
 ## ✨ Features at a Glance
